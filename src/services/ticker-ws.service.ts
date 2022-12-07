@@ -117,7 +117,7 @@ export class TickerWebsocketService {
     if (eventNumberPrevTimeFrame % 5 === 0) {
       const sourceTableStartEventNumber = eventNumberPrevTimeFrame - 5;
       const eventNumberCurrentTimeFrame = eventNumberPrevTimeFrame / 5;
-      await this.processTimeFraneChartData(
+      await this.processTimeFrameChartData(
         DataStorageTable.table1Minute,
         sourceTableStartEventNumber,
         eventNumberPrevTimeFrame,
@@ -132,7 +132,7 @@ export class TickerWebsocketService {
     if (eventNumberPrevTimeFrame % 3 === 0) {
       const sourceTableStartEventNumber = eventNumberPrevTimeFrame - 3;
       const eventNumberCurrentTimeFrame = eventNumberPrevTimeFrame / 3;
-      await this.processTimeFraneChartData(
+      await this.processTimeFrameChartData(
         DataStorageTable.table5Minute,
         sourceTableStartEventNumber,
         eventNumberPrevTimeFrame,
@@ -147,7 +147,7 @@ export class TickerWebsocketService {
     if (eventNumberPrevTimeFrame % 2 === 0) {
       const sourceTableStartEventNumber = eventNumberPrevTimeFrame - 2;
       const eventNumberCurrentTimeFrame = eventNumberPrevTimeFrame / 2;
-      await this.processTimeFraneChartData(
+      await this.processTimeFrameChartData(
         DataStorageTable.table15Minute,
         sourceTableStartEventNumber,
         eventNumberPrevTimeFrame,
@@ -162,7 +162,7 @@ export class TickerWebsocketService {
     if (eventNumberPrevTimeFrame % 2 === 0) {
       const sourceTableStartEventNumber = eventNumberPrevTimeFrame - 2;
       const eventNumberCurrentTimeFrame = eventNumberPrevTimeFrame / 2;
-      await this.processTimeFraneChartData(
+      await this.processTimeFrameChartData(
         DataStorageTable.table30Minute,
         sourceTableStartEventNumber,
         eventNumberPrevTimeFrame,
@@ -177,7 +177,7 @@ export class TickerWebsocketService {
     if (eventNumberPrevTimeFrame % 2 === 0) {
       const sourceTableStartEventNumber = eventNumberPrevTimeFrame - 2;
       const eventNumberCurrentTimeFrame = eventNumberPrevTimeFrame / 2;
-      await this.processTimeFraneChartData(
+      await this.processTimeFrameChartData(
         DataStorageTable.table1Hour,
         sourceTableStartEventNumber,
         eventNumberPrevTimeFrame,
@@ -192,7 +192,7 @@ export class TickerWebsocketService {
     if (eventNumberPrevTimeFrame % 2 === 0) {
       const sourceTableStartEventNumber = eventNumberPrevTimeFrame - 2;
       const eventNumberCurrentTimeFrame = eventNumberPrevTimeFrame / 2;
-      await this.processTimeFraneChartData(
+      await this.processTimeFrameChartData(
         DataStorageTable.table2Hour,
         sourceTableStartEventNumber,
         eventNumberPrevTimeFrame,
@@ -207,7 +207,7 @@ export class TickerWebsocketService {
     if (eventNumberPrevTimeFrame % 3 === 0) {
       const sourceTableStartEventNumber = eventNumberPrevTimeFrame - 3;
       const eventNumberCurrentTimeFrame = eventNumberPrevTimeFrame / 3;
-      await this.processTimeFraneChartData(
+      await this.processTimeFrameChartData(
         DataStorageTable.table4Hour,
         sourceTableStartEventNumber,
         eventNumberPrevTimeFrame,
@@ -222,7 +222,7 @@ export class TickerWebsocketService {
     if (eventNumberPrevTimeFrame % 2 === 0) {
       const sourceTableStartEventNumber = eventNumberPrevTimeFrame - 2;
       const eventNumberCurrentTimeFrame = eventNumberPrevTimeFrame / 2;
-      await this.processTimeFraneChartData(
+      await this.processTimeFrameChartData(
         DataStorageTable.table12Hour,
         sourceTableStartEventNumber,
         eventNumberPrevTimeFrame,
@@ -232,7 +232,7 @@ export class TickerWebsocketService {
     }
   }
 
-  private async processTimeFraneChartData(
+  private async processTimeFrameChartData(
     sourceTable: DataStorageTable,
     sourceStartEventNumber: number,
     sourceEndEventNumber: number,
@@ -281,6 +281,10 @@ export class TickerWebsocketService {
         tempTargetData,
         targetTable,
         targetEventNumber
+      );
+    } else {
+      this.logWriter.warn(
+        `data not found on ${sourceTable} for processing ${targetTable} data  event: ${targetEventNumber}`
       );
     }
   }

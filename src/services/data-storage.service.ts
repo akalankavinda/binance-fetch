@@ -50,7 +50,9 @@ export class DataStorageService {
         const res: any = await this.conn.query(insertQuery);
         const resultHeaders: MySql.ResultSetHeader = res[0];
         this.logWriter.info(
-          `inserted ${resultHeaders.affectedRows} rows to ${tableName}`.toString()
+          `inserted ${resultHeaders.affectedRows} rows to ${tableName} event: ${
+            data[data.length - 1].event_number
+          }`.toString()
         );
       } finally {
         this.clearUnnecessaryHistory(eventNumber, tableName);
