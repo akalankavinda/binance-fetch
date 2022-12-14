@@ -23,7 +23,8 @@ export class TickerWebsocketService {
   }
 
   constructor() {
-    this.client = new Spot();
+    this.client = new Spot("", "", { wsURL: "wss://fstream.binance.com" });
+    //this.client = new Spot();
   }
 
   private onTickerWebsocketOpen(): void {
