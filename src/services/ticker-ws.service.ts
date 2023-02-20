@@ -56,8 +56,12 @@ export class TickerWebsocketService {
   }
 
   private processChartData(data: TickerItemDto[]): void {
-    let timestamp = data[0].E;
-    this.buffer1MinuteChartData(data, timestamp);
+    try {
+      let timestamp = data[0].E;
+      this.buffer1MinuteChartData(data, timestamp);
+    } catch (error) {
+      console.error("Error reading E of ", data[0]);
+    }
   }
 
   private buffer1MinuteChartData(

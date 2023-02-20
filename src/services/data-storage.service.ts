@@ -77,11 +77,16 @@ export class DataStorageService {
     eventNumberStart: number,
     eventNumberEnd: number
   ): Promise<PriceRecord[] | null> {
-    let fetchQuery = `SELECT * FROM ${tableName} WHERE event_number > ${eventNumberStart} AND event_number <= ${eventNumberEnd} ORDER BY id ASC;`;
+    let fetchQuery = `SELECT * FROM ${tableName} WHERE event_number > ? AND event_number <= ? ORDER BY id ASC;`;
+    let queryVariables = [eventNumberStart, eventNumberEnd];
     try {
-      const [rows, fields] = await this.conn.execute(fetchQuery);
+      const [rows, fields] = await this.conn.execute(
+        fetchQuery,
+        queryVariables
+      );
       return <PriceRecord[]>rows;
     } catch (error) {
+      console.log(error);
       return null;
     }
   }
